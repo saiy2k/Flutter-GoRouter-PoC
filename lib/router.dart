@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:routing/home/view/home_page.dart';
+import 'package:routing/wallet/view/wallet_page.dart';
 
 final navigatorKey = GlobalKey<NavigatorState>();
 
 final GoRouter router = GoRouter(navigatorKey: navigatorKey, initialLocation: '/', routes: <RouteBase>[
+  // WalletBloc goes here
   GoRoute(
     path: '/',
     builder: (context, state) {
-      return const Text('HomePage()');
+      return const HomePage();
     },
   ),
   GoRoute(
       // TODO: Should be ideally '/wallet/{walletId}'
-      path: '/wallet',
+      // TxBloc goes here
+      path: '/wallet/:walletId',
       builder: (context, state) {
-        return const Text('WalletPage()');
+        return WalletPage(id: state.pathParameters['walletId'] ?? '');
       },
       routes: <RouteBase>[
         GoRoute(
