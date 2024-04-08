@@ -14,8 +14,6 @@ final GoRouter router = GoRouter(navigatorKey: navigatorKey, initialLocation: '/
     },
   ),
   GoRoute(
-      // TODO: Should be ideally '/wallet/{walletId}'
-      // TxBloc goes here
       path: '/wallet/:walletId',
       builder: (context, state) {
         return WalletPage(id: state.pathParameters['walletId'] ?? '');

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:routing/_pkg/misc.dart';
+import 'package:routing/tx/bloc/tx_bloc.dart';
+import 'package:routing/tx/widgets/tx_list.dart';
 import 'package:routing/wallet/bloc/wallet_bloc.dart';
 import 'package:routing/wallet/widgets/wallet_heading.dart';
 
@@ -11,23 +14,23 @@ class WalletView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final wallet = context.select((WalletBloc cubit) => cubit.state.selectedWallet!);
-    // final loadStatus = context.select((TxBloc cubit) => cubit.state.status);
-    // final txs = context.select((TxBloc cubit) => cubit.state.txs);
+    final loadStatus = context.select((TxBloc cubit) => cubit.state.status);
+    final txs = context.select((TxBloc cubit) => cubit.state.txs);
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text('${wallet.name}: ${id}'),
+        title: Text('${wallet.name}: $id'),
         actions: [
-          // loadStatus == LoadStatus.loading ? const CircularProgressIndicator() : const SizedBox.shrink(),
+          loadStatus == LoadStatus.loading ? const CircularProgressIndicator() : const SizedBox.shrink(),
         ],
       ),
       body: Column(
         children: [
-          WalletHeader(wallet: wallet, txs: []),
-          // Expanded(
-          //   child: TxList(txs: []),
-          // ),
+          WalletHeader(wallet: wallet, txs: txs),
+          Expanded(
+            child: TxList(txs: txs),
+          ),
         ],
       ),
       floatingActionButton: Column(

@@ -1,16 +1,21 @@
-# routing
+ * Ideal routes:
+ *  / - HomePage
+ *  /wallet/{walletId} - WalletPage
+ *  /wallet/{walletId}/tx/{txId} - TxPage
+ *  /wallet/{walletId}/address-list - AddressListPage
+ *  /wallet/{walletId}/address/{addrId} - AddressPage
+ *  /wallet/{walletId}/settings - WalletSettingsPage
+ *  /send - SendPage
+ *  /receive - ReceivePage
+ * This way, we can have navs from Tx to Address page and then to a different Tx.
+ * And able to navigate back with h/w back button.
+ * Since state will be updated based on route url paramters.
+ * Will have good cache at repo layer, to avoid unnecessary network calls.
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+ * Widget tree and routes
+ *  WalletBloc
+ *      AppView
+ *          Router
+ *              / - HomePage
+ *              /wallet/{:walletId} - WalletPage
+ *              /wallet/{:walletId}/tx/{tdId} - TxPage
